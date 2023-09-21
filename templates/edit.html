@@ -1,0 +1,28 @@
+{% extends "cabecera.html" %}
+{% block title %}
+Modificar un producto
+{% endblock %}
+{% block content %}
+        <h1>Modificar producto</h1>
+        {% for row in rows %}
+        <form action="{{ url_for('editrec') }}" method="POST">
+            <h3 style="color:blue">SKU: {{ row['sku']}}</h3>
+            <input type="hidden" name="rowid" value="{{ row['rowid'] }}">
+            <input type="hidden" name="sku" value="{{ row['sku'] }}"/><br>
+
+            Nombre<br>
+            <input type="text" name="nombre" value="{{row['nombre']}}"/><br>
+
+            Descripcion<br>
+            <input type="text" name="descripcion" value="{{row['descripcion']}}"/><br>
+
+            Precio<br>
+            <input type="text" name="precio" value="{{ row['precio'] }}"/><br>
+
+            Cantidad en stock<br>
+            <input type="text" name="stock" value="{{ row['stock'] }}"/><br>
+
+            <input type="submit" value="Modificar" /><br>
+        </form>
+        {% endfor %}
+{% endblock %}

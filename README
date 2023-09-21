@@ -1,0 +1,13 @@
+Para poder ejecutar este codigo se ha utilizado Visual Studio code.
+
+Primero en el apartado view > Command Palette selecione la opcion Python: Create Enviroment > Venv y tu version de Python
+
+Luego crea la base de datos database.db
+
+Posteriormente para iniciarlo ejecuta los siguientes comandos en la consola:
+python -m pip install flask
+.venv\Scripts\Activate.ps1
+python create_table.py
+python -m flask run
+
+Una vez realizados los pasos podras acceder al url que se mostrara en la consola para acceder a la web.

@@ -1,0 +1,63 @@
+{% extends "cabecera.html" %}
+{% block title %}
+Lista de productos
+{% endblock %}
+{% block content %}
+<div class="b" id="id1" style="display: none">
+    <button type="button" class="btn btn-secondary btn-sm" id="sho">Mostrar tabla</button>
+</div>
+<div class="b" id="id2">
+    <button type="button" class="btn btn-secondary btn-sm" id="hid">Ocultar tabla</button>
+</div>
+<div>
+{{ msg }}
+</div>
+
+<!--Tabla que contiene los productos-->
+<div class="b3" id="tab1">
+    <table class="table table-dark" id="tab">
+        <thead>
+            <td><strong>SKU</strong></td>
+            <td><strong>Nombre</strong></td>
+            <td><strong>Descripcion</strong></td>
+            <td><strong>Precio</strong></td>
+            <td><strong>Stock</strong></td>
+            <td></td>
+            <td></td>
+        </thead>
+
+        {% for row in rows %}
+        <tr class="table-active">
+            <td>{{ row["sku"] }}</td>
+            <td>{{ row["nombre"] }}</td>
+            <td>{{ row["descripcion"] }}</td>
+            <td> {{ row["precio"]}}</td>
+            <td>{{ row["stock"] }}</td>
+            <td><form action="{{url_for('edit')}}" method="POST"><input type="hidden" name="id" value="{{ row['sku'] }}"><input type="submit" value="Edit"></form> </td>
+            <td><form onsubmit="return confirm('¿Estas seguro de que quieres eliminarlo?');" action="{{url_for('delete')}}" method="POST"><input type="hidden" name="id" value="{{ row['sku'] }}"><input type="submit" value="Delete"></form> </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<a class="btn btn-primary" href="{{ url_for('enternew') }}" role="button">Añadir producto</a>
+
+<!--Fragmento de codigo JavaScript para ocultar y mostrar la tabla-->
+<script>
+    $(document).ready(function(){
+        $("#sho").click(function(event){
+            $("#id1").hide();
+            $("#id2").show();
+            $("#tab1").show();
+        });
+        $("#hid").click(function(event){
+            $("#id1").show();
+            $("#id2").hide();
+            $("#tab1").hide();
+        });
+    });
+</script>
+
+
+{% endblock %}
+
